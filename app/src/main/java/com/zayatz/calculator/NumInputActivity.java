@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NumInputActivity extends Activity implements View.OnClickListener{
 
@@ -30,10 +31,15 @@ public class NumInputActivity extends Activity implements View.OnClickListener{
             case R.id.btnOk_ANI:
                 if (TextUtils.isEmpty(editNumber.getText().toString())) { //перевіряє на порожність editNumber
                     setResult(RESULT_CANCELED);
-                } else {
-                    sendNumber();
+                    finish();
                 }
-                finish();
+                else if (editNumber.getText().toString().trim().length() > 3) {            //перевірка на к-сть символів
+                    Toast.makeText(this, "Wrong number input", Toast.LENGTH_LONG).show();  //якщо більше 3, виводить тост із помилкою
+                }
+                else {
+                    sendNumber();
+                    finish();
+                }
                 break;
         }
     }
@@ -45,4 +51,6 @@ public class NumInputActivity extends Activity implements View.OnClickListener{
 
         setResult(RESULT_OK, intent);
     }
+
+
 }

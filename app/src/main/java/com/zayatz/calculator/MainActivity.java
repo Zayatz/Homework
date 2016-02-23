@@ -11,6 +11,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     TextView tvInptA;
     TextView tvInptB;
+    TextView tvResult;
     Button btnCalc;
 
     @Override
@@ -20,6 +21,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         tvInptA = (TextView) findViewById(R.id.tvInptA_AM);
         tvInptB = (TextView) findViewById(R.id.tvInptB_AM);
+        tvResult = (TextView) findViewById(R.id.tvResult_AM);
         btnCalc = (Button) findViewById(R.id.btnCalc_AM);
 
         tvInptA.setOnClickListener(this);
@@ -37,8 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 openNumInputActivity(Constants.REQUEST_NUMBER_B);
                 break;
             case R.id.btnCalc_AM:
-                tvInptA.setText("A");
-                tvInptB.setText("B");
+                //tvResult.setText(sum(tvInptA, tvInptB);
                 break;
         }
     }
@@ -56,7 +57,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         if (resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            final String Number = extras.getString(Constants.NUMBER); // записує результат у змінну
+            String Number = extras.getString(Constants.NUMBER); // записує результат у змінну
 
         /*перевіряє requestCode, залежно від нього, вирішує, куди відправляти результат*/
             switch (requestCode) {
@@ -69,5 +70,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
             }
         }
     }
+
+   /* public String sum (TextView a, TextView b) {
+        float x = new Float(a.getText().toString());
+        float y = new Float(a.getText().toString());
+
+        return String.valueOf(x + y);
+    } */
 }
 
