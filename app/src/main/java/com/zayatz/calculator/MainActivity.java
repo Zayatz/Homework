@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
     TextView tvInptA;
     TextView tvInptB;
     TextView tvResult;
+    EditText etInptOperation;
     Button btnCalc;
 
     @Override
@@ -22,6 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         tvInptA = (TextView) findViewById(R.id.tvInptA_AM);
         tvInptB = (TextView) findViewById(R.id.tvInptB_AM);
         tvResult = (TextView) findViewById(R.id.tvResult_AM);
+        etInptOperation = (EditText) findViewById(R.id.etInptOperation_AM);
         btnCalc = (Button) findViewById(R.id.btnCalc_AM);
 
         tvInptA.setOnClickListener(this);
@@ -33,13 +37,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvInptA_AM:
-                openNumInputActivity(Constants.REQUEST_NUMBER_A); //
+                openNumInputActivity(Constants.REQUEST_NUMBER_A); //REQUEST_NUMBER визначає, куди будуть відправлені дані
                 break;
             case R.id.tvInptB_AM:
                 openNumInputActivity(Constants.REQUEST_NUMBER_B);
                 break;
             case R.id.btnCalc_AM:
-                //tvResult.setText(sum(tvInptA, tvInptB);
+                tvResult.setText(Calc(etInptOperation, tvInptA, tvInptB)); // TODO: 23.02.2016 додати перевірку на ввід А та В
                 break;
         }
     }
@@ -71,11 +75,40 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
-   /* public String sum (TextView a, TextView b) {
-        float x = new Float(a.getText().toString());
-        float y = new Float(a.getText().toString());
 
-        return String.valueOf(x + y);
-    } */
+    public String Calc (EditText operation, TextView a, TextView b) {
+        float x = Float.valueOf(a.getText().toString()); //приведення даних із TextView до float
+        float y = Float.valueOf(b.getText().toString());
+
+        String sResult = "";
+        String symbol = operation.getText().toString(); //дістає строчку  із EditText
+
+        if (operation.getText().toString().trim().length() > 1) { //перевірка на довжину (не більше 1 символа)
+            Toast.makeText(this, "More than 1 symbol", Toast.LENGTH_LONG).show();
+        }
+        else if (operation.getText().toString().trim().length() == 0) { //перевірка на порожність
+            Toast.makeText(this, "Edit operation", Toast.LENGTH_LONG).show();
+        }
+        else if (symbol != "+" && symbol != "-" && symbol != "*" && symbol != "/") { //перевірка на відповідність (введена дія чи інший символ)
+                Toast.makeText(this, "Invalid symbol", Toast.LENGTH_LONG).show();
+            }
+        else {
+            switch (symbol) {  //розпізнання дії, її виконання
+                case "+":
+                    sResult = Float.toString(x + y);
+                    break;
+                case "-":
+                    sResult = Float.toString(x - y);
+                    break;
+                case "*":
+                    sResult = Float.toString(x * y);
+                    break;
+                case "/":
+                    sResult = Float.toString(x / y);
+                    break;
+            }
+        }
+        return sResult;
+    }
 }
 

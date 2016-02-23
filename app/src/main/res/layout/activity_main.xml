@@ -21,6 +21,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/etInptOperation_AM"
         android:hint="editSymbol"
         android:layout_marginTop="90dp"
          />
