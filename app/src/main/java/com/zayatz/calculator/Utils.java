@@ -10,8 +10,8 @@ public class Utils
 {
     private static int sTheme;
 
-    /**
-     * Set the theme of the Activity, and restart it by creating a new Activity of the same type.
+    /* задає тему отриманому актівіті та перезапускає його
+
      */
     public static void changeToTheme(Activity activity, int theme)
     {
@@ -21,7 +21,7 @@ public class Utils
         activity.startActivity(new Intent(activity, activity.getClass()));
     }
 
-    /** Set the theme of the activity, according to the configuration. */
+    /* задає тему згідно з вибором, передає через інтент стан switchBtn */
     public static void onActivityCreateSetTheme(Activity activity)
     {
         switch (sTheme)
@@ -29,14 +29,12 @@ public class Utils
             default:
             case Constants.THEME_OFF:
                 activity.setTheme(R.style.switchOffStyle);
-                Intent intent = new Intent();
-                intent.putExtra(Constants.GET_EXTRA, false);
+                Intent intent = new Intent().putExtra(Constants.GET_EXTRA, false);
                 activity.setIntent(intent);
                 break;
             case Constants.THEME_ON:
                 activity.setTheme(R.style.switchOnStyle);
-                intent = new Intent();
-                intent.putExtra(Constants.GET_EXTRA, true);
+                intent = new Intent().putExtra(Constants.GET_EXTRA, true);
                 activity.setIntent(intent);
                 break;
         }

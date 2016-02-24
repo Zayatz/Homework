@@ -20,14 +20,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btnCalc;
     Switch switchBtn;
 
-    boolean b;
+    boolean switchState; //для відображення стану switchBtn: true - увімкнено, false - вимкнено
 
     Activity mMainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Utils.onActivityCreateSetTheme(this);
+        Utils.onActivityCreateSetTheme(this); // задає тему
         setContentView(R.layout.activity_main);
 
         tvInptA = (TextView) findViewById(R.id.tvInptA_AM);
@@ -36,15 +36,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
         etInptOperation = (EditText) findViewById(R.id.etInptOperation_AM);
         btnCalc = (Button) findViewById(R.id.btnCalc_AM);
         switchBtn = (Switch) findViewById(R.id.swChangeStyle_AM);
-        mMainActivity = this;
+        mMainActivity = this; // для передачі об'єкта актівіті у кліклісенер
 
         tvInptA.setOnClickListener(this);
         tvInptB.setOnClickListener(this);
         btnCalc.setOnClickListener(this);
 
-        boolean b = this.getIntent().getBooleanExtra(Constants.GET_EXTRA, true);
-        switchBtn.setChecked(b);
+        switchState = this.getIntent().getBooleanExtra(Constants.GET_EXTRA, true);  // приймає значення із NumInputActivity для індикації стану switchBtn
+        switchBtn.setChecked(switchState); // перемикає switchBtn відповідно до теми. Ніч - false, день - true
 
+        /*ClickListener для switchButton, через implements треба створювати
+          зайвий об'єкт*/
         CompoundButton.OnCheckedChangeListener occlSwitch =
             new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -78,11 +80,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    /*відкриває NumInputActivity, REQUEST_NUMBER задається для диференціації */
+    /*відкриває NumInputActivity, REQUEST_NUMBER задається для диференціації
+     * також через інтент передає стан switchButton, для синохронізації стилів */
     public void openNumInputActivity (int REQUEST_NUMBER) {
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), NumInputActivity.class);
-        intent.putExtra(Constants.PUT_EXTRA, b);
+        intent.putExtra(Constants.PUT_EXTRA, switchState);
         startActivityForResult(intent, REQUEST_NUMBER);
     }
 
