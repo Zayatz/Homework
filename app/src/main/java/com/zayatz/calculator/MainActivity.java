@@ -43,7 +43,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 openNumInputActivity(Constants.REQUEST_NUMBER_B);
                 break;
             case R.id.btnCalc_AM:
-                tvResult.setText(Calc(etInptOperation, tvInptA, tvInptB)); // TODO: 23.02.2016 додати перевірку на ввід А та В
+                if(inputsCheck(tvInptA, tvInptB) && operationCheck(etInptOperation)) { // TODO: 23.02.2016 додати перевірку на ввід А та В
+                    tvResult.setText(Calc(etInptOperation, tvInptA, tvInptB));
+                }
                 break;
         }
     }
@@ -74,41 +76,86 @@ public class MainActivity extends Activity implements View.OnClickListener{
             }
         }
     }
+    /*перевіряє поля для вводу(чи не пусті, чи не пусте А, чи не пусте В), true - поля задовільняють
+    вимогам, false - виводить тост із помилкою*/
+    public boolean inputsCheck (TextView a, TextView b) {
+        String strA = a.getText().toString().trim();
+        String strB = b.getText().toString().trim();
 
+        if (strA.length() == 0 && strB.length() == 0) { //чи не пусті А та В
+            Toast.makeText(this, R.string.input_variables_MA, Toast.LENGTH_LONG).show();
 
+            return false;
+        }
+        else if (strA.length() == 0) {  //чи не пусте А
+            Toast.makeText(this, R.string.input_variableA_MA, Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+        else if (strB.length() == 0){  //чи не пусте В
+            Toast.makeText(this, R.string.input_variableB_MA, Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+
+        else return true;
+    }
+
+    /*виконує операції над змінними, повертає строчку з результатом*/
     public String Calc (EditText operation, TextView a, TextView b) {
         float x = Float.valueOf(a.getText().toString()); //приведення даних із TextView до float
         float y = Float.valueOf(b.getText().toString());
 
         String sResult = "";
         String symbol = operation.getText().toString(); //дістає строчку  із EditText
+        char chSymbol = symbol.charAt(0); //на стрінгу матюкався, із символом працює
 
-        if (operation.getText().toString().trim().length() > 1) { //перевірка на довжину (не більше 1 символа)
-            Toast.makeText(this, "More than 1 symbol", Toast.LENGTH_LONG).show();
-        }
-        else if (operation.getText().toString().trim().length() == 0) { //перевірка на порожність
-            Toast.makeText(this, "Edit operation", Toast.LENGTH_LONG).show();
-        }
-        else if (symbol != "+" && symbol != "-" && symbol != "*" && symbol != "/") { //перевірка на відповідність (введена дія чи інший символ)
-                Toast.makeText(this, "Invalid symbol", Toast.LENGTH_LONG).show();
-            }
-        else {
-            switch (symbol) {  //розпізнання дії, її виконання
-                case "+":
-                    sResult = Float.toString(x + y);
-                    break;
-                case "-":
-                    sResult = Float.toString(x - y);
-                    break;
-                case "*":
-                    sResult = Float.toString(x * y);
-                    break;
-                case "/":
-                    sResult = Float.toString(x / y);
-                    break;
-            }
-        }
+                switch (chSymbol) {  //розпізнання дії, її виконання
+                    case '+':
+                        sResult = Float.toString(x + y);
+                        break;
+                    case '-':
+                        sResult = Float.toString(x - y);
+                        break;
+                    case '*':
+                        sResult = Float.toString(x * y);
+                        break;
+                    case '/':
+                        sResult = Float.toString(x / y);
+                        break;
+                }
+
         return sResult;
     }
+
+   /*перевіряє, чи введена операція відповідає вимогам (чи не пусте поле, довжина, чи є операційним
+   символом). true - ідповідає, false - не відповідає, виводить тост із помилкою*/
+    public boolean operationCheck(EditText etSymbol) {
+
+        String symbol = etSymbol.getText().toString().trim();
+
+        if (symbol.length() > 1) { //перевірка на довжину (не більше 1 символа)
+            Toast.makeText(this, R.string.more_than_1_symbol_MA, Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+        else if (symbol.length() == 0) { //перевірка на порожність
+            Toast.makeText(this, R.string.edit_operation_MA, Toast.LENGTH_LONG).show();
+
+            return false;
+        }
+        else {
+            char chSymbol = symbol.charAt(0); //дубово, але працює. Строчки порівнювати не хотіло
+            if (chSymbol != '+' && chSymbol != '-' && chSymbol != '*' && chSymbol != '/') { //перевірка на відповідність (введена дія чи інший символ)
+                Toast.makeText(this, R.string.invalid_symbol, Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 }
 

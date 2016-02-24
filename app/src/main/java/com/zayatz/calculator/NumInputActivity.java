@@ -34,7 +34,7 @@ public class NumInputActivity extends Activity implements View.OnClickListener{
                     finish();
                 }
                 else if (editNumber.getText().toString().trim().length() > 3) {            //перевірка на к-сть символів
-                    Toast.makeText(this, "Wrong number input", Toast.LENGTH_LONG).show();  //якщо більше 3, виводить тост із помилкою
+                    Toast.makeText(this, R.string.wrong_number_input_NIA, Toast.LENGTH_LONG).show();  //якщо більше 3, виводить тост із помилкою
                 }
                 else {
                     sendNumber();

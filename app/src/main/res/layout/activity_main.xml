@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A!!!"
+        android:hint="a"
         android:id="@+id/tvInptA_AM"
         android:background="#f5ed8b"
         android:clickable="true"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="B!!!"
+        android:hint="b"
         android:id="@+id/tvInptB_AM"
         android:layout_marginTop="50dp"
         android:onClick="onClick"
