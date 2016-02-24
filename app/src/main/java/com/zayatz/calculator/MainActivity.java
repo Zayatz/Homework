@@ -11,7 +11,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
 
     TextView tvInptA;
     TextView tvInptB;
@@ -20,9 +20,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
     Button btnCalc;
     Switch switchBtn;
 
+    boolean b;
+
+    Activity mMainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
 
         tvInptA = (TextView) findViewById(R.id.tvInptA_AM);
@@ -31,28 +36,29 @@ public class MainActivity extends Activity implements View.OnClickListener{
         etInptOperation = (EditText) findViewById(R.id.etInptOperation_AM);
         btnCalc = (Button) findViewById(R.id.btnCalc_AM);
         switchBtn = (Switch) findViewById(R.id.swChangeStyle_AM);
+        mMainActivity = this;
 
         tvInptA.setOnClickListener(this);
         tvInptB.setOnClickListener(this);
         btnCalc.setOnClickListener(this);
 
-        switchBtn.setChecked(true);
+        boolean b = this.getIntent().getBooleanExtra(Constants.GET_EXTRA, true);
+        switchBtn.setChecked(b);
 
-        CompoundButton.OnCheckedChangeListener switchListener =
-                new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    tvResult.setText("it works");
+        CompoundButton.OnCheckedChangeListener occlSwitch =
+            new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        Utils.changeToTheme(mMainActivity, Constants.THEME_ON);
+                    }
+                    else {
+                        Utils.changeToTheme(mMainActivity, Constants.THEME_OFF);
+                    }
                 }
-                else {
-                    tvResult.setText("doesn't work");
-                }
-            }
-        };
+            };
 
-        switchBtn.setOnCheckedChangeListener(switchListener);
-        checkSwitch(switchBtn);
+        switchBtn.setOnCheckedChangeListener(occlSwitch);
     }
 
     @Override
@@ -76,6 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     public void openNumInputActivity (int REQUEST_NUMBER) {
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), NumInputActivity.class);
+        intent.putExtra(Constants.PUT_EXTRA, b);
         startActivityForResult(intent, REQUEST_NUMBER);
     }
 
@@ -177,15 +184,5 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         return true;
     }
-
-    public void checkSwitch (Switch switchBtn) {
-        if (switchBtn.isChecked()) {
-            tvResult.setText("it works");
-        }
-        else {
-            tvResult.setText("it doesn't work");
-        }
-    }
-
 }
 

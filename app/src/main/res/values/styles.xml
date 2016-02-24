@@ -8,4 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="switchOnStyle" parent="AppTheme">
+        <item name="android:background">#f4e96e</item>
+    </style>
+
+    <style name="switchOffStyle" parent="AppTheme">
+        <item name="android:background">#a0aced</item>
+    </style>
+
 </resources>

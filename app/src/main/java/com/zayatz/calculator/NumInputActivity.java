@@ -17,6 +17,7 @@ public class NumInputActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_num_input);
 
         editNumber = (EditText) findViewById(R.id.etInptNum_ANI);
