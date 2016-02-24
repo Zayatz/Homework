@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     TextView tvResult;
     EditText etInptOperation;
     Button btnCalc;
+    Switch switchBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +30,29 @@ public class MainActivity extends Activity implements View.OnClickListener{
         tvResult = (TextView) findViewById(R.id.tvResult_AM);
         etInptOperation = (EditText) findViewById(R.id.etInptOperation_AM);
         btnCalc = (Button) findViewById(R.id.btnCalc_AM);
+        switchBtn = (Switch) findViewById(R.id.swChangeStyle_AM);
 
         tvInptA.setOnClickListener(this);
         tvInptB.setOnClickListener(this);
         btnCalc.setOnClickListener(this);
+
+        switchBtn.setChecked(true);
+
+        CompoundButton.OnCheckedChangeListener switchListener =
+                new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    tvResult.setText("it works");
+                }
+                else {
+                    tvResult.setText("doesn't work");
+                }
+            }
+        };
+
+        switchBtn.setOnCheckedChangeListener(switchListener);
+        checkSwitch(switchBtn);
     }
 
     @Override
@@ -43,7 +65,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 openNumInputActivity(Constants.REQUEST_NUMBER_B);
                 break;
             case R.id.btnCalc_AM:
-                if(inputsCheck(tvInptA, tvInptB) && operationCheck(etInptOperation)) { // TODO: 23.02.2016 додати перевірку на ввід А та В
+                if(inputsCheck(tvInptA, tvInptB) && operationCheck(etInptOperation)) {
                     tvResult.setText(Calc(etInptOperation, tvInptA, tvInptB));
                 }
                 break;
@@ -145,7 +167,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             return false;
         }
         else {
-            char chSymbol = symbol.charAt(0); //дубово, але працює. Строчки порівнювати не хотіло
+            char chSymbol = symbol.charAt(0); //дубово, але працює. Щоб не використовувати equals
             if (chSymbol != '+' && chSymbol != '-' && chSymbol != '*' && chSymbol != '/') { //перевірка на відповідність (введена дія чи інший символ)
                 Toast.makeText(this, R.string.invalid_symbol, Toast.LENGTH_LONG).show();
 
@@ -156,6 +178,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
         return true;
     }
 
+    public void checkSwitch (Switch switchBtn) {
+        if (switchBtn.isChecked()) {
+            tvResult.setText("it works");
+        }
+        else {
+            tvResult.setText("it doesn't work");
+        }
+    }
 
 }
 
