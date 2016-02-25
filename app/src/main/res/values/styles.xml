@@ -16,4 +16,19 @@
         <item name="android:background">#a0aced</item>
     </style>
 
+    <style name="LayoutStyle" parent="AppTheme">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/layoutHeigh</item>
+        <item name="android:padding">@dimen/layoutPadding</item>
+    </style>
+
+    <style name="layoutItemStyle" parent="AppTheme">
+        <item name="android:layout_margin">@dimen/layoutItemMargin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="layoutItemStyle.layoutSmallItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
 </resources>

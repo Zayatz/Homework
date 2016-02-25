@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,54 +7,63 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.zayatz.calculator.MainActivity">
+    tools:context="com.zayatz.calculator.MainActivity"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="a"
-        android:id="@+id/tvInptA_AM"
-        android:background="#f5ed8b"
-        android:clickable="true"
-        android:enabled="true"
-        android:onClick="onClick" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etInptOperation_AM"
-        android:hint="editSymbol"
-        android:layout_marginTop="90dp"
-         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="b"
-        android:id="@+id/tvInptB_AM"
-        android:layout_marginTop="50dp"
-        android:onClick="onClick"
-        android:enabled="true"
-        android:clickable="true" />
+        <LinearLayout
+            style="@style/LayoutStyle"
+            android:orientation="horizontal"
+            android:layout_marginTop="150dp">
+            <TextView
+                style="@style/layoutItemStyle.layoutSmallItemStyle"
+                android:hint="a"
+                android:id="@+id/tvInptA_AM"
+                android:background="@color/white"
+                android:layout_weight="2"/>
+            <EditText
+                style="@style/layoutItemStyle.layoutSmallItemStyle"
+                android:id="@+id/etInptOperation_AM"
+                android:background="@color/grey"
+                android:hint="editSymbol"
+                android:layout_weight="1"
+                 />
+            <TextView
+                style="@style/layoutItemStyle.layoutSmallItemStyle"
+                android:background="@color/white"
+                android:hint="b"
+                android:id="@+id/tvInptB_AM"
+                android:layout_weight="2"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Calc"
-        android:id="@+id/btnCalc_AM"
-        android:layout_marginTop="150dp"
-         />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Result"
-        android:id="@+id/tvResult_AM"
-        android:layout_marginTop="200dp"
-         />
+        <LinearLayout
+            style="@style/LayoutStyle"
+            android:orientation="vertical">
+            <Button
+                style="@style/layoutItemStyle"
+                android:text="@string/calculate"
+                android:id="@+id/btnCalc_AM" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LayoutStyle"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/layoutItemStyle"
+                android:text="Result"
+                android:id="@+id/tvResult_AM"
+                android:background="@color/white"/>
+
+
+        </LinearLayout>
+
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/swChangeStyle_AM"
-        android:layout_marginTop="250dp"
-        />
-</RelativeLayout>
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

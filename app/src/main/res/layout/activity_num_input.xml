@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etInptNum_ANI"
-        android:hint="Input a (or b)"
-        android:inputType="numberDecimal"
-        android:onClick="onClick" />
+    <LinearLayout
+        style="@style/LayoutStyle"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/numInputLayoutMargin">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOk_ANI"
-        android:text="OK"/>
+        <EditText
+            style="@style/layoutItemStyle"
+            android:id="@+id/etInptNum_ANI"
+            android:hint="@string/inputAorB"
+            android:inputType="numberDecimal"
+            android:background="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/LayoutStyle"
+        android:orientation="vertical">
+        <Button
+            style="@style/layoutItemStyle"
+            android:id="@+id/btnOk_ANI"
+            android:text="OK"/>
+    </LinearLayout>
 
 </LinearLayout>

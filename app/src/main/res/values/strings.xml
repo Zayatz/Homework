@@ -7,4 +7,6 @@
     <string name="input_variables_MA">Input variables</string>
     <string name="input_variableA_MA">Input variable A</string>
     <string name="input_variableB_MA">Input variable B</string>
+    <string name="calculate">Calculate</string>
+    <string name="inputAorB">Input a (or b)</string>
 </resources>
