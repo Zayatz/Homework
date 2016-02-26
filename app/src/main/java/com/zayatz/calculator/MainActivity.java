@@ -69,6 +69,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switchBtn.setOnCheckedChangeListener(occlSwitch);
     }
 
+    /*при закритті (системою, користувачем) програми очищає поля, щоб при запуску знову, вони
+     * були чистими. При зміні теми актівіті перезапускається, але onDestroy не запускається,
+     * таким чином при зміні теми дані зберігаються, при виході - ні*/
+    @Override
+    protected void onDestroy() {
+        clearFields();
+        saveCurrentState();
+        super.onDestroy();
+    }
 
     void saveCurrentState() {
         viewsState = getPreferences(MODE_PRIVATE);
@@ -214,6 +223,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         return true;
+    }
+
+    void clearFields() {
+        switchState = false;
+        etInptOperation.setText(null);
+        tvInptA.setText(null);
+        tvInptB.setText(null);
+        tvResult.setText(null);
     }
 }
 
