@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ed.putBoolean(Constants.SWITCH_STATE, switchState);
         ed.putString(Constants.INPUT_OPERATION_STATE, String.valueOf(etInptOperation.getText()));
         ed.putString(Constants.INPUT_A_STATE, String.valueOf(tvInptA.getText()));
-        ed.putString(Constants.INPUT_B_STATE, String.valueOf(tvInptA.getText()));
+        ed.putString(Constants.INPUT_B_STATE, String.valueOf(tvInptB.getText()));
         ed.putString(Constants.RESULT_STATE, String.valueOf(tvResult.getText()));
         ed.apply();
 

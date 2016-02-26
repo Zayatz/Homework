@@ -16,7 +16,7 @@
         <EditText
             style="@style/layoutItemStyle"
             android:id="@+id/etInptNum_ANI"
-            android:hint="@string/inputAorB"
+            android:hint="@string/inputAorB_NIA_XML"
             android:inputType="numberDecimal"
             android:background="@color/white"/>
     </LinearLayout>

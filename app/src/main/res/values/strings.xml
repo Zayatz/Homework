@@ -7,6 +7,8 @@
     <string name="input_variables_MA">Input variables</string>
     <string name="input_variableA_MA">Input variable A</string>
     <string name="input_variableB_MA">Input variable B</string>
-    <string name="calculate">Calculate</string>
-    <string name="inputAorB">Input a (or b)</string>
+    <string name="calculate_AM_XML">Calculate</string>
+    <string name="inputAorB_NIA_XML">Input a (or b)</string>
+    <string name="result_AM_XML">Result</string>
+    <string name="edit_symbol_AM_XML">Edit symbol</string>
 </resources>

@@ -24,7 +24,7 @@
                 style="@style/layoutItemStyle.layoutSmallItemStyle"
                 android:id="@+id/etInptOperation_AM"
                 android:background="@color/grey"
-                android:hint="editSymbol"
+                android:hint="@string/edit_symbol_AM_XML"
                 android:layout_weight="1"
                  />
             <TextView
@@ -41,7 +41,7 @@
             android:orientation="vertical">
             <Button
                 style="@style/layoutItemStyle"
-                android:text="@string/calculate"
+                android:text="@string/calculate_AM_XML"
                 android:id="@+id/btnCalc_AM" />
 
         </LinearLayout>
@@ -52,7 +52,7 @@
 
             <TextView
                 style="@style/layoutItemStyle"
-                android:text="Result"
+                android:hint="@string/result_AM_XML"
                 android:id="@+id/tvResult_AM"
                 android:background="@color/white"/>
 
