@@ -2,6 +2,7 @@ package com.zayatz.calculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     EditText etInptOperation;
     Button btnCalc;
     Switch switchBtn;
+
+    SharedPreferences viewsState;
 
     boolean switchState; //для відображення стану switchBtn: true - увімкнено, false - вимкнено
 
@@ -42,7 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         tvInptB.setOnClickListener(this);
         btnCalc.setOnClickListener(this);
 
-        switchState = this.getIntent().getBooleanExtra(Constants.GET_EXTRA, true);  // приймає значення із NumInputActivity для індикації стану switchBtn
+        loadCurrentState(); //завантажує стан актівіті
         switchBtn.setChecked(switchState); // перемикає switchBtn відповідно до теми. Ніч - false, день - true
 
         /*ClickListener для switchButton, через implements треба створювати
@@ -53,14 +56,39 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         Utils.changeToTheme(mMainActivity, Constants.THEME_ON);
+                        switchState = true;
                     }
                     else {
                         Utils.changeToTheme(mMainActivity, Constants.THEME_OFF);
+                        switchState = false;
                     }
+                    saveCurrentState(); //зберігає стан актівіті
                 }
             };
 
         switchBtn.setOnCheckedChangeListener(occlSwitch);
+    }
+
+
+    void saveCurrentState() {
+        viewsState = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = viewsState.edit();
+        ed.putBoolean(Constants.SWITCH_STATE, switchState);
+        ed.putString(Constants.INPUT_OPERATION_STATE, String.valueOf(etInptOperation.getText()));
+        ed.putString(Constants.INPUT_A_STATE, String.valueOf(tvInptA.getText()));
+        ed.putString(Constants.INPUT_B_STATE, String.valueOf(tvInptA.getText()));
+        ed.putString(Constants.RESULT_STATE, String.valueOf(tvResult.getText()));
+        ed.apply();
+
+    }
+
+    void loadCurrentState() {
+        viewsState = getPreferences(MODE_PRIVATE);
+        switchState = viewsState.getBoolean(Constants.SWITCH_STATE, false);
+        etInptOperation.setText(viewsState.getString(Constants.INPUT_OPERATION_STATE, null));
+        tvInptA.setText(viewsState.getString(Constants.INPUT_A_STATE, null));
+        tvInptB.setText(viewsState.getString(Constants.INPUT_B_STATE, null));
+        tvResult.setText(viewsState.getString(Constants.RESULT_STATE, null));
     }
 
     @Override

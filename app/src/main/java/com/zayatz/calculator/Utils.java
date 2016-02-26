@@ -1,8 +1,5 @@
 package com.zayatz.calculator;
 
-/**
- * Created by Zayatz on 24.02.2016.
- */
 import android.app.Activity;
 import android.content.Intent;
 
@@ -29,13 +26,9 @@ public class Utils
             default:
             case Constants.THEME_OFF:
                 activity.setTheme(R.style.switchOffStyle);
-                Intent intent = new Intent().putExtra(Constants.GET_EXTRA, false);
-                activity.setIntent(intent);
                 break;
             case Constants.THEME_ON:
                 activity.setTheme(R.style.switchOnStyle);
-                intent = new Intent().putExtra(Constants.GET_EXTRA, true);
-                activity.setIntent(intent);
                 break;
         }
     }
